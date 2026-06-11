@@ -14,7 +14,11 @@
       "Read(//tmp/**)",
       "mcp__Claude_Preview__preview_start",
       "Bash(curl -s -o /dev/null -w \"recompiled HTTP %{http_code}\\\\n\" http://localhost:3000)",
-      "Bash(curl -s http://localhost:3000)"
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(git push *)",
+      "Bash(curl -s -X POST http://localhost:3000/api/story -H \"Content-Type: application/json\" -d '{\"childName\":\"Sara\",\"age\":4,\"theme\":\"adventure\",\"daySummary\":\"played in the garden\",\"length\":\"short\",\"language\":\"en\",\"model\":\"google/gemma-4-31b-it:free\",\"illustrate\":false}')",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{try{const j=JSON.parse\\(d\\);if\\(j.error\\){console.log\\('ERROR:',j.error\\)}else{console.log\\('title:',j.plan.title\\);console.log\\('pages:',j.plan.pages.length\\);console.log\\('page1:',j.plan.pages[0].text.slice\\(0,70\\)\\)}}catch\\(e\\){console.log\\('raw:',d.slice\\(0,200\\)\\)}}\\)\")"
     ]
   }
 }

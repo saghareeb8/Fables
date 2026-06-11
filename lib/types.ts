@@ -49,6 +49,14 @@ export interface OpenRouterModel {
   name: string;
 }
 
+/** Structured story returned by the text model (server-side). */
+export interface StoryPlan {
+  title: string;
+  artStyle: string;
+  characterDescription: string;
+  pages: { text: string; imagePrompt: string }[];
+}
+
 export type ProgressStage =
   | { kind: "writing" }
   | { kind: "illustrating"; current: number; total: number }
