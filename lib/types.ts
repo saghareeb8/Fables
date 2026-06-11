@@ -1,5 +1,7 @@
 export type StoryLength = "short" | "medium" | "long";
 
+export type Language = "en" | "ar";
+
 export interface StoryTheme {
   id: string;
   label: string;
@@ -16,6 +18,7 @@ export interface StoryInput {
   theme: string; // theme id
   daySummary: string;
   length: StoryLength;
+  language: Language;
   model: string; // OpenRouter model id (text)
   illustrate: boolean;
 }
@@ -34,6 +37,7 @@ export interface Booklet {
   childName: string;
   age: number;
   theme: string; // theme id
+  language: Language;
   artStyle: string;
   characterDescription: string;
   coverImage?: string;

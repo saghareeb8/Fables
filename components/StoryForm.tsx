@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { StoryInput, StoryLength, OpenRouterModel } from "@/lib/types";
+import type {
+  StoryInput,
+  StoryLength,
+  Language,
+  OpenRouterModel,
+} from "@/lib/types";
 import { THEMES, LENGTHS } from "@/lib/themes";
 
 interface Props {
@@ -22,6 +27,7 @@ export default function StoryForm({
   const [theme, setTheme] = useState(THEMES[1].id); // Adventure
   const [daySummary, setDaySummary] = useState("");
   const [length, setLength] = useState<StoryLength>("medium");
+  const [language, setLanguage] = useState<Language>("en");
   const [illustrate, setIllustrate] = useState(true);
   const [model, setModel] = useState(defaultModel);
   const [error, setError] = useState("");
@@ -44,6 +50,7 @@ export default function StoryForm({
       theme,
       daySummary: daySummary.trim(),
       length,
+      language,
       model: effectiveModel,
       illustrate,
     });
@@ -151,6 +158,38 @@ export default function StoryForm({
               >
                 <div className="font-display font-bold">{l.label}</div>
                 <div className="text-[11px] text-night-300/80">{l.hint}</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Language */}
+      <div className="mt-5">
+        <span className="field-label">Language</span>
+        <div className="grid grid-cols-2 gap-2">
+          {(
+            [
+              { id: "en", label: "English", sub: "Left-to-right" },
+              { id: "ar", label: "العربية", sub: "من اليمين لليسار" },
+            ] as const
+          ).map((l) => {
+            const active = l.id === language;
+            return (
+              <button
+                type="button"
+                key={l.id}
+                onClick={() => setLanguage(l.id)}
+                className={`rounded-2xl border px-3 py-3 text-center transition ${
+                  l.id === "ar" ? "font-arabic" : ""
+                } ${
+                  active
+                    ? "border-night-300 bg-night-300/15 text-night-50 shadow-glow-sm"
+                    : "border-white/10 bg-night-900/50 text-night-100 hover:bg-white/10"
+                }`}
+              >
+                <div className="font-display text-lg font-bold">{l.label}</div>
+                <div className="text-[11px] text-night-300/80">{l.sub}</div>
               </button>
             );
           })}

@@ -90,6 +90,11 @@ interface StoryPlan {
 function buildStoryPrompt(input: StoryInput): { system: string; user: string } {
   const theme = getTheme(input.theme);
   const pageCount = pagesForLength(input.length);
+  const isArabic = input.language === "ar";
+
+  const langRule = isArabic
+    ? 'Write the "title" and every page "text" in Arabic (فصحى — Modern Standard Arabic that is simple and warm for children). Keep "artStyle", "characterDescription", and every "imagePrompt" in ENGLISH (the illustrator only understands English).'
+    : 'Write everything in English.';
 
   const system = [
     "You are a beloved children's picture-book author who writes warm, age-appropriate bedtime stories.",
@@ -104,6 +109,8 @@ Child's age: ${input.age}
 Theme: ${theme.label} — make it ${theme.tone}.
 What happened in the child's day (weave this gently into the story): ${input.daySummary || "a normal happy day"}
 
+Language: ${langRule}
+
 Requirements:
 - Make ${input.childName} the hero of the story.
 - Write for roughly age ${input.age}: simple, soothing language that winds down toward sleep.
@@ -111,9 +118,9 @@ Requirements:
 - End calm, cozy, and reassuring (perfect for falling asleep).
 
 Also design a consistent illustration style so every page looks like the same book:
-- "artStyle": one sentence describing a single cohesive children's-book illustration style (medium, colors, mood).
-- "characterDescription": a short, vivid visual description of ${input.childName} (hair, clothing, key features) so the character looks identical on every page.
-- For each page, "imagePrompt": a concrete description of the scene to illustrate (do NOT restate the art style or character description — those are added automatically).
+- "artStyle": one sentence (in English) describing a single cohesive children's-book illustration style (medium, colors, mood).
+- "characterDescription": a short, vivid visual description (in English) of ${input.childName} (hair, clothing, key features) so the character looks identical on every page.
+- For each page, "imagePrompt": a concrete description (in English) of the scene to illustrate (do NOT restate the art style or character description — those are added automatically).
 
 Respond with ONLY this JSON shape:
 {
@@ -258,6 +265,7 @@ export async function generateBooklet(
     childName: input.childName,
     age: input.age,
     theme: input.theme,
+    language: input.language,
     artStyle: plan.artStyle,
     characterDescription: plan.characterDescription,
     coverImage,

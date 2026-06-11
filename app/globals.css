@@ -25,6 +25,11 @@
 }
 
 @layer components {
+  .font-arabic {
+    font-family: "Baloo Bhaijaan 2", "Quicksand", ui-rounded, system-ui,
+      sans-serif;
+  }
+
   .glass {
     @apply rounded-3xl border border-white/10 bg-white/[0.06] backdrop-blur-xl;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
