@@ -86,8 +86,11 @@ export default function BookletViewer({ booklet, onNewStory }: Props) {
         </span>
       </div>
 
-      {/* Open book */}
+      {/* Open book — always physical LTR so the spread and the turning leaf
+          share the same left/right geometry. The flip direction for Arabic is
+          handled by `useA`; only the text inside is rendered RTL. */}
       <div
+        dir="ltr"
         className="relative mx-auto h-[60vh] max-h-[560px] min-h-[380px] w-full"
         style={{ perspective: "2600px" }}
       >
@@ -251,6 +254,7 @@ function BookPage({
         )
       ) : (
         <div
+          dir={isArabic ? "rtl" : "ltr"}
           className={`flex h-full flex-col justify-center overflow-y-auto p-6 sm:p-9 ${
             isArabic ? "text-right" : ""
           }`}
