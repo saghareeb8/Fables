@@ -57,23 +57,15 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        // Book page turn: a sheet pivots on the spine through a full 180°.
-        // "next"/"prev" = reading direction; left/right = which edge is the spine.
-        "page-turn-left-next": {
+        // Open-book leaf turn: a half-page leaf pivots on the center spine
+        // through a full 180°. "left" sweeps to the left, "right" to the right.
+        "leaf-flip-left": {
           "0%": { transform: "rotateY(0deg)" },
           "100%": { transform: "rotateY(-180deg)" },
         },
-        "page-turn-left-prev": {
-          "0%": { transform: "rotateY(-180deg)" },
-          "100%": { transform: "rotateY(0deg)" },
-        },
-        "page-turn-right-next": {
+        "leaf-flip-right": {
           "0%": { transform: "rotateY(0deg)" },
           "100%": { transform: "rotateY(180deg)" },
-        },
-        "page-turn-right-prev": {
-          "0%": { transform: "rotateY(180deg)" },
-          "100%": { transform: "rotateY(0deg)" },
         },
       },
       animation: {
@@ -82,14 +74,10 @@ const config: Config = {
         "fade-up": "fade-up 0.6s ease-out both",
         "spin-slow": "spin-slow 8s linear infinite",
         shimmer: "shimmer 2.5s linear infinite",
-        "page-turn-left-next":
-          "page-turn-left-next 0.75s cubic-bezier(0.36, 0.1, 0.3, 1) both",
-        "page-turn-left-prev":
-          "page-turn-left-prev 0.75s cubic-bezier(0.36, 0.1, 0.3, 1) both",
-        "page-turn-right-next":
-          "page-turn-right-next 0.75s cubic-bezier(0.36, 0.1, 0.3, 1) both",
-        "page-turn-right-prev":
-          "page-turn-right-prev 0.75s cubic-bezier(0.36, 0.1, 0.3, 1) both",
+        "leaf-flip-left":
+          "leaf-flip-left 0.8s cubic-bezier(0.36, 0.1, 0.3, 1) both",
+        "leaf-flip-right":
+          "leaf-flip-right 0.8s cubic-bezier(0.36, 0.1, 0.3, 1) both",
       },
     },
   },

@@ -138,7 +138,11 @@ export default function Home() {
         )}
 
         {view === "booklet" && booklet && (
-          <BookletViewer booklet={booklet} onNewStory={() => setView("home")} />
+          <BookletViewer
+            key={booklet.id}
+            booklet={booklet}
+            onNewStory={() => setView("home")}
+          />
         )}
       </div>
 
